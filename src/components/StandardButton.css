@@ -1,0 +1,15 @@
+.Button {
+    background-color: #F8F4F9;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+.Button p, .Button h3 {
+    margin: 5px;
+}
+
+.Button:hover{
+    background-color: #c6c4c7;
+}

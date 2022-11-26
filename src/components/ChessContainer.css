@@ -1,0 +1,36 @@
+.board-container {
+    display: grid;
+    grid-template-columns: 30px repeat(7, 80px) 30px;
+    grid-template-rows: 30px repeat(7, 80px) 30px;
+    background-image: url("../../public/assets/board-bck.jpg");
+    width: 620px;
+    margin: 20px auto;
+}
+
+.numbers-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    grid-area: numbers;
+    grid-row: 2 / 9;
+    grid-column: 1;
+    margin-right: 10px;
+}
+
+.letters-container {
+    grid-area: letters;
+    grid-row: 1;
+    grid-column: 2 / 9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-bottom: 5px;
+}
+
+.letters-container, .numbers-container {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 600;
+}

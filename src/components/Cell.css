@@ -1,0 +1,18 @@
+.Cell {
+    height: 12.5%;
+    width: 12.5%;
+    border: 1px solid black;
+}
+
+.odd{
+    background-color: #6B4B3E;
+}
+
+.even{
+    background-color: #C49E85;
+}
+
+.piece-image {
+    width: 100%;
+    transform: translate(0, 0);
+}
