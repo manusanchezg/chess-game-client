@@ -5,18 +5,22 @@ import Game from "./Game";
 
 export default function ChessBoard(props) {
   const [chessBoard, setChessBoard] = useState([]);
+  const [clickedPosition, setClickedPosition] = useState([]);
   const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
   const game = new Game();
   const board = game.chess;
-  const [clickedPosition, setClickedPosition] = useState([]);
 
   useEffect(() => {
     setChessBoard(board.board().reverse());
-  }, []);
+  }, [clickedPosition]);
 
   function makeClickMove(e, firstClick, secondClick) {
-    console.log(board.moves({square: firstClick}))
-    e.target.className += "focus"
+    // console.log(board.moves({ square: firstClick }));
+    if (clickedPosition.length <= 1) {
+      e.target.className += " focus";
+        setClickedPosition([firstClick]);
+    }
+    // console.log(clickedPosition.length)
   }
 
   const drop = (e) => {
@@ -24,12 +28,15 @@ export default function ChessBoard(props) {
     const id = e.dataTransfer.getData("image/png");
     const img = document.getElementById(id);
     const piece = img.dataset.piece;
-    let currPosition = img.dataset.currposition
-    if (game.isValidMove(currPosition, e.currentTarget.id.split("-")[1], piece)) {
-      console.log("valid move", board.turn())
-      board.move(e.currentTarget.id.split("-")[1])
+    let currPosition = img.dataset.currposition;
+    // console.log(board.turn());
+    if (
+      game.isValidMove(currPosition, e.currentTarget.id.split("-")[1], piece)
+    ) {
+      // console.log("valid move");
+      board.move(e.currentTarget.id.split("-")[1]);
       e.currentTarget.appendChild(img);
-      img.dataset.currposition = e.currentTarget.id.split("-")[1]
+      img.dataset.currposition = e.currentTarget.id.split("-")[1];
     }
   };
 

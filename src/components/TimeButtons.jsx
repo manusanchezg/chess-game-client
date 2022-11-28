@@ -2,20 +2,43 @@ import StandardButton from "./StandardButton";
 import "./TimeButtons.css";
 
 export default function TimeButtons(props) {
+  const time = [1, 3, 5, 10, 30, null];
+  const title = [
+    "Bullet",
+    "Blitz",
+    "Blitz",
+    "Rapid",
+    "Classical",
+    "No time limit",
+  ];
+  const playTitle = [
+    "Play with a friend",
+    "Play with the computer",
+    "Play with a friend online",
+  ];
+
+  function handleTime(time) {
+    if (time) return time > 1 ? `${time} minutes` : `${time} minute`;
+    return "";
+  }
+
   return (
     <div className="buttons-container">
       <div className="clock-button-container">
-        <StandardButton title="Bullet" time="1 minute" className="Button"/>
-        <StandardButton title="Blitz" time="3 minutes" />
-        <StandardButton title="Blitz" time="5 minutes" />
-        <StandardButton title="Rapid" time="10 minutes" />
-        <StandardButton title="Classical" time="30 minutes" />
-        <StandardButton title="No time limit" />
+        {time.map((t, idx) => (
+          <StandardButton
+            key={`time-${t}`}
+            title={title[idx]}
+            time={handleTime(t)}
+            onClick={() => props.setTime(t)}
+            className="Button"
+          />
+        ))}
       </div>
       <div className="play-button-container">
-        <StandardButton title="Play with a friend" />
-        <StandardButton title="Play with the computer" />
-        <StandardButton title="Play with a friend online" />
+        {playTitle.map((title) => (
+          <StandardButton title={title} key={title} />
+        ))}
       </div>
     </div>
   );

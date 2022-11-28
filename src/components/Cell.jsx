@@ -17,9 +17,9 @@ export default function Cell(props) {
         e.dataTransfer.dropEffect = "move";
       }}
       onDrop={props.drop}
-      /*onClick={e => props.makeClickMove(e, props.position.split("-")[1])}*/
+      onClick={e => props.makeClickMove(e, props.position.split("-")[1])}
     >
-      <Piece piece={props.piece} position={props.position.split("-")[1]} makeClickMove={props.makeClickMove}/>
+      <Piece piece={props.piece} position={props.position.split("-")[1]}/>
     </div>
   );
 }

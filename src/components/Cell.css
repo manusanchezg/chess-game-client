@@ -16,3 +16,7 @@
     width: 100%;
     transform: translate(0, 0);
 }
+
+.focus {
+    background-color: #c2cb6493;
+}
