@@ -4,16 +4,22 @@ import HomePage from "./components/HomePage";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [time, setTime] = useState("")
+  const [time, setTime] = useState(0)
+
+  function setPlayingTime(t) {
+    const toMinutes = 60
+    t = Number(t.split(" ")[0])
+    setTime(t * toMinutes)
+  }
 
   useEffect(() => {
-    console.log(time)
+
   }, [time])
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage time={time} setTime={setTime} />} />
-        <Route path="/game" element={<ChessContainer />} />
+        <Route path="/" element={<HomePage setPlayingTime={setPlayingTime} />} />
+        <Route path="/game" element={<ChessContainer time={time}/>} />
       </Routes>
     </Router>
   );

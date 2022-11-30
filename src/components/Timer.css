@@ -1,0 +1,12 @@
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F8F4F9;
+    min-width: 140px;
+    min-height: 60px;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 2rem;
+}

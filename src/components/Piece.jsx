@@ -14,6 +14,7 @@ export default function Piece(props) {
           }}
           data-piece={props.piece.split(".")[0]}
           data-currposition={props.position}
+
         />
       ) : null}
     </React.Fragment>

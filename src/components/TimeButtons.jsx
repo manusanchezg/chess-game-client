@@ -2,7 +2,7 @@ import StandardButton from "./StandardButton";
 import "./TimeButtons.css";
 
 export default function TimeButtons(props) {
-  const time = [1, 3, 5, 10, 30, null];
+  const minutes = [1, 3, 5, 10, 30, null];
   const title = [
     "Bullet",
     "Blitz",
@@ -25,12 +25,12 @@ export default function TimeButtons(props) {
   return (
     <div className="buttons-container">
       <div className="clock-button-container">
-        {time.map((t, idx) => (
+        {minutes.map((t, idx) => (
           <StandardButton
             key={`time-${t}`}
             title={title[idx]}
             time={handleTime(t)}
-            onClick={() => props.setTime(t)}
+            setPlayingTime={props.setPlayingTime}
             className="Button"
           />
         ))}

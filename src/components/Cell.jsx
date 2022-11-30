@@ -3,8 +3,8 @@ import Piece from "./Piece";
 
 export default function Cell(props) {
   function setClassName(idx, rowIdx) {
-    if ((idx + 1 * rowIdx + 1) % 2 === 0) return "even";
-    return "odd";
+    if ((idx + 1 * rowIdx + 1) % 2 === 0) return "odd";
+    return "even";
   }
 
   return (
@@ -17,9 +17,10 @@ export default function Cell(props) {
         e.dataTransfer.dropEffect = "move";
       }}
       onDrop={props.drop}
-      onClick={e => props.makeClickMove(e, props.position.split("-")[1])}
+      onClick={props.moveOnClick}
+      data-position={props.position.split("-")[1]}
     >
-      <Piece piece={props.piece} position={props.position.split("-")[1]}/>
+      <Piece piece={props.piece} position={props.position.split("-")[1]} />
     </div>
   );
 }

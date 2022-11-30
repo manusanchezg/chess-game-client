@@ -5,18 +5,25 @@ export default class Game {
     this.chess = new Chess();
   }
 
-  movePiece(currPos, nextPos, piece) {
-    if (this.isValidMove(currPos, nextPos, piece)) this.chess.move(nextPos);
-  }
-
   isValidMove(currPos, nextPos, piece) {
     const moves = this.chess.moves({ square: `${currPos}` });
+    console.log(moves);
     const pieceLetter = piece.split("")[1];
-    // console.log(moves)
-    // console.log(`${pieceLetter}${nextPos}`)
-    if (moves.includes(`${pieceLetter}${nextPos}`) || moves.includes(`${nextPos}`)) {
-      return true
+    if (
+      moves.includes(`${pieceLetter}${nextPos}`) ||
+      moves.includes(`${nextPos}`) 
+    ) {
+      return true;
     }
-    return false
+    return false;
+  }
+
+  #isEating(moves, position) {
+    const isEating = moves.filter((move) => move.includes("x"))
+    if (isEating) {
+      this.chess.remove(position);
+      return true;
+    }
+    return false;
   }
 }

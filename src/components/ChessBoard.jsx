@@ -1,27 +1,37 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Cell from "./Cell";
 import "./ChessBoard.css";
-import Game from "./Game";
 
 export default function ChessBoard(props) {
   const [chessBoard, setChessBoard] = useState([]);
-  const [clickedPosition, setClickedPosition] = useState([]);
   const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
-  const game = new Game();
-  const board = game.chess;
+  const board = props.game.chess;
+  // const [isSelected, setIsSelected] = useState(false)
+  // const [clicks, setClicks] = useState([]);
 
   useEffect(() => {
     setChessBoard(board.board().reverse());
-  }, [clickedPosition]);
+  }, []);
 
-  function makeClickMove(e, firstClick, secondClick) {
-    // console.log(board.moves({ square: firstClick }));
-    if (clickedPosition.length <= 1) {
-      e.target.className += " focus";
-        setClickedPosition([firstClick]);
-    }
-    // console.log(clickedPosition.length)
-  }
+  // function moveOnClick(e) {
+  //   let img
+  //   let tried = ''
+  //   const position = e.target.dataset.currposition;
+  //   if (!tried && !isSelected) {
+  //     // setClicks([...clicks, position]);
+  //     tried = position
+  //     setIsSelected(true)
+  //     e.target.className = e.target.className + " focus";
+  //     img = document.getElementById(tried);
+  //     const piece = img.dataset;
+  //     if (props.game.isValidMove(tried, e.target.id, piece.piece)) {
+  //       board.move({ from: clicks[0], to: clicks[1] });
+  //       e.currentTarget.appendChild(img);
+  //       img.dataset.currposition = e.target.id;
+  //     }
+  //   }
+  //   setClicks([]);
+  // }
 
   const drop = (e) => {
     e.preventDefault();
@@ -29,14 +39,13 @@ export default function ChessBoard(props) {
     const img = document.getElementById(id);
     const piece = img.dataset.piece;
     let currPosition = img.dataset.currposition;
-    // console.log(board.turn());
     if (
-      game.isValidMove(currPosition, e.currentTarget.id.split("-")[1], piece)
+      props.game.isValidMove(currPosition, e.currentTarget.id.split("-")[1], piece)
     ) {
-      // console.log("valid move");
-      board.move(e.currentTarget.id.split("-")[1]);
+      board.move({ from: currPosition, to: e.currentTarget.id.split("-")[1] });
       e.currentTarget.appendChild(img);
       img.dataset.currposition = e.currentTarget.id.split("-")[1];
+      props.handleClick()
     }
   };
 
@@ -51,7 +60,6 @@ export default function ChessBoard(props) {
             rowIdx={rowIdx}
             piece={cell ? cell.color + cell.type.toUpperCase() : null}
             drop={drop}
-            makeClickMove={makeClickMove}
           />
         ))
       )}

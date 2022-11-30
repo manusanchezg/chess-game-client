@@ -7,11 +7,12 @@ export default function HomePage(props) {
     const handleOpen = () => setOpen(true);
 
     const usernames = localStorage.getItem('usernames')
+    // if(!usernames) handleOpen()
 
     return (
         <div className="HomePage">
             <h1>Chess with friends</h1>
-            <TimeButtons />
+            <TimeButtons setPlayingTime={props.setPlayingTime}/>
             <Portal open={open} setOpen={setOpen}/>
         </div>
     )

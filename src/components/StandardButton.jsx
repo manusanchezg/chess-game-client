@@ -8,7 +8,7 @@ export default function StandardButton(props) {
     display: "flex",
     flexDirection: "column",
     width: "250px",
-    height: "100px",
+    maxHeight: "90px",
     padding: "15px"
   };
 
@@ -18,7 +18,7 @@ export default function StandardButton(props) {
   };
 
   return (
-    <Link to="/game" style={link}>
+    <Link to="/game" style={link} onClick={() => props.setPlayingTime(props.time)}>
       <Button variant="contained" className="Button" style={button}>
         <h3>{props.title}</h3>
         <p>{props.time ? props.time : null}</p>
