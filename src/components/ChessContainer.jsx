@@ -21,12 +21,10 @@ export default function ChessContainer(props) {
 
   const game = new Game();
 
-  function handleClick() {
-    console.log(game.chess.board())
-    console.log(game.chess.turn())
-    if (game.chess.turn() === "w") {
+  function handleClick(move) {
+    if (move.color === "b") {
       setWhiteCounter(!whiteCounterIsActive);
-    } else if (game.chess.turn() === "b") {
+    } else if (move.color === "w") {
       setBlackCounter(!blackCounterIsActive);
     }
   }

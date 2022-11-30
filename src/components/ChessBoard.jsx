@@ -11,7 +11,7 @@ export default function ChessBoard(props) {
 
   useEffect(() => {
     setChessBoard(board.board().reverse());
-  }, []);
+  }, [board]);
 
   // function moveOnClick(e) {
   //   let img
@@ -41,11 +41,11 @@ export default function ChessBoard(props) {
     let currPosition = img.dataset.currposition;
     if (
       props.game.isValidMove(currPosition, e.currentTarget.id.split("-")[1], piece)
-    ) {
-      board.move({ from: currPosition, to: e.currentTarget.id.split("-")[1] });
-      e.currentTarget.appendChild(img);
-      img.dataset.currposition = e.currentTarget.id.split("-")[1];
-      props.handleClick()
+      ) {
+        const move = board.move({ from: currPosition, to: e.currentTarget.id.split("-")[1] });
+        e.currentTarget.appendChild(img);
+        img.dataset.currposition = e.currentTarget.id.split("-")[1];
+        props.handleClick(move)
     }
   };
 
